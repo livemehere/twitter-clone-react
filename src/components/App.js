@@ -26,6 +26,7 @@ function App() {
   return (
     <>
       <Router isLoggedIn={isLoggedIn} />
+
       <footer>&copy; kong</footer>
     </>
   );
