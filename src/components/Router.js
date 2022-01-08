@@ -4,7 +4,7 @@ import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import NavBar from "./NavBar";
 
-function Router({ isLoggedIn }) {
+function Router({ isLoggedIn, user }) {
   return (
     <HashRouter>
       {isLoggedIn ? <NavBar /> : null}
@@ -12,7 +12,7 @@ function Router({ isLoggedIn }) {
         {isLoggedIn ? (
           <>
             <Route exact path="/">
-              <Home />
+              <Home user={user} />
             </Route>
             <Route path="/profile">
               <h1>Profile</h1>

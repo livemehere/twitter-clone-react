@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import firebaseInstance from "../firebaseInstance";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  doc,
+} from "firebase/firestore";
 import Tweet from "../components/Tweet";
 
-function Home() {
+function Home({ user }) {
   const [tweet, setTweet] = useState("");
   const db = getFirestore(firebaseInstance);
   const [tweets, setTweets] = useState([]);
@@ -22,25 +29,25 @@ function Home() {
   };
 
   const getTweetsFromDB = async () => {
-    const querySnapshot = await getDocs(collection(db, "tweets"));
-
-    querySnapshot.forEach((doc) => {
-      let tweetObj = {
+    const unsub = onSnapshot(collection(db, "tweets"), (querySnapshot) => {
+      const tweetArray = querySnapshot.docs.map((doc) => ({
         docId: doc.id,
         ...doc.data(),
-      };
-      setTweets((prev) => [tweetObj, ...prev]);
+      }));
+      setTweets(tweetArray);
     });
   };
 
   const addTweetToDB = async (tweet) => {
     try {
       await addDoc(collection(db, "tweets"), {
-        uid: "test uid",
+        uid: user.uid,
         tweet: tweet,
+        name: user.displayName,
         timestamp: Date.now(),
+        isUpdated: false,
+        updateTimestamp: Date.now(),
       });
-      // console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -50,7 +57,13 @@ function Home() {
     <div>
       <h1>HOME</h1>
       <form onSubmit={onSubmit}>
-        <input type="text" value={tweet} onChange={onChange} maxLength={100} />
+        <input
+          type="text"
+          value={tweet}
+          onChange={onChange}
+          maxLength={100}
+          placeholder="What is on your mind?"
+        />
         <input type="submit" />
       </form>
       <div>
@@ -61,6 +74,10 @@ function Home() {
             uid={tweet.uid}
             tweet={tweet.tweet}
             timestamp={tweet.timestamp}
+            name={tweet.name}
+            isUpdated={tweet.isUpdated}
+            updateTimestamp={tweet.updateTimestamp}
+            isOwner={user.uid === tweet.uid}
           />
         ))}
       </div>
