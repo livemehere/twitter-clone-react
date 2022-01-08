@@ -18,6 +18,9 @@ function Tweet({
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const ok = window.confirm("정말 수정하실건가요?");
+    if (!ok) return;
+
     if (newTweet.length <= 0) {
       alert("공백을 채워주세요");
       return;
@@ -40,6 +43,9 @@ function Tweet({
     setNewTweet(e.target.value);
   };
   const handleDelete = async () => {
+    const ok = window.confirm("정말 삭제하실건가요?");
+    if (!ok) return;
+
     await deleteDoc(doc(db, "tweets", docId));
   };
   return (
