@@ -7,16 +7,17 @@ import {
   addDoc,
   onSnapshot,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Tweet from "../components/Tweet";
 
 function Home({ user }) {
   const [tweet, setTweet] = useState("");
   const db = getFirestore(firebaseInstance);
   const storage = getStorage(firebaseInstance);
-  const [photo, setPhoto] = useState();
+  const [photo, setPhoto] = useState("");
   const [type, setType] = useState("");
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [preFile, setPreFile] = useState();
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
@@ -27,32 +28,42 @@ function Home({ user }) {
     const fileRef = ref(storage, `/tweetPhotos/${uuidv4()}.${type}`); //FIXME: 이건 Png말고 각자의 확장자로 변경해주기
     setLoading(true);
     const snapshot = await uploadBytes(fileRef, file);
+    const url = await getDownloadURL(fileRef);
     setLoading(false);
-    alert("업로드 성공");
+    setPreFile(null);
+    return url;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (tweet.length <= 0) {
       alert("공백을 채워주세요!");
       return;
     }
 
-    // addTweetToDB(tweet);
-
-    upload(photo, type, setIsLoading);
-    setPhoto(null);
+    const url = await upload(photo, type, setIsLoading);
+    await addTweetToDB(tweet, url);
     setType("");
     setTweet("");
   };
   const onChange = (e) => {
     setTweet(e.target.value);
   };
+
+  const printFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (evt) {
+      setPreFile(evt.target.result);
+    };
+  };
+
   const onFileChange = (e) => {
     if (e.target.files[0]) {
       setPhoto(e.target.files[0]);
+      setType(e.target.files[0].type.replace(/image\//, ""));
+      printFile(e.target.files[0]);
     }
-    setType(e.target.files[0].type.replace(/image\//, ""));
   };
 
   const getTweetsFromDB = async () => {
@@ -65,7 +76,7 @@ function Home({ user }) {
     });
   };
 
-  const addTweetToDB = async (tweet) => {
+  const addTweetToDB = async (tweet, url) => {
     try {
       await addDoc(collection(db, "tweets"), {
         uid: user.uid,
@@ -74,6 +85,7 @@ function Home({ user }) {
         timestamp: Date.now(),
         isUpdated: false,
         updateTimestamp: Date.now(),
+        url: url,
       });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -93,6 +105,12 @@ function Home({ user }) {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" />
+        {preFile && (
+          <div>
+            <img src={preFile} alt="미리보기" width="50px" height="50px" />
+            <button onClick={() => setPreFile(null)}>취소</button>
+          </div>
+        )}
       </form>
       <div>
         {tweets.map((tweet) => (
@@ -106,6 +124,7 @@ function Home({ user }) {
             isUpdated={tweet.isUpdated}
             updateTimestamp={tweet.updateTimestamp}
             isOwner={user.uid === tweet.uid}
+            url={tweet.url}
           />
         ))}
       </div>

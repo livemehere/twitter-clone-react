@@ -11,6 +11,7 @@ function Tweet({
   isUpdated,
   updateTimestamp,
   isOwner,
+  url,
 }) {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweet);
@@ -83,6 +84,11 @@ function Tweet({
               )}`}</p>
             )}
             <p>작성자:{name}</p>
+            {url !== "" ? (
+              <div>
+                <img src={url} alt="photo" width="50px" height="50px" />
+              </div>
+            ) : null}
           </div>
           {isOwner ? (
             <div>
