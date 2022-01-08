@@ -31,7 +31,7 @@ function Home({ user }) {
   }, []);
 
   const upload = async (file, type, setLoading) => {
-    const fileRef = ref(storage, `/tweetPhotos/${uuidv4()}.${type}`); //FIXME: 이건 Png말고 각자의 확장자로 변경해주기
+    const fileRef = ref(storage, `/tweetPhotos/${uuidv4()}.${type}`);
     setLoading(true);
     const snapshot = await uploadBytes(fileRef, file);
     const url = await getDownloadURL(fileRef);
@@ -83,6 +83,7 @@ function Home({ user }) {
   };
 
   const addTweetToDB = async (tweet, url) => {
+    // FIXME: 그냥 이메일로 가입한 유저 에겐 비어있는내용이에요!
     try {
       await addDoc(collection(db, "tweets"), {
         uid: user.uid,

@@ -74,6 +74,11 @@ function Tweet({
         <div>
           <div>
             <h2>{tweet}</h2>
+            {url !== "" ? (
+              <div>
+                <img src={url} alt="photo" width="50px" height="50px" />
+              </div>
+            ) : null}
             {isUpdated ? (
               <p>
                 {`수정일:${moment(updateTimestamp).format(
@@ -86,11 +91,6 @@ function Tweet({
               )}`}</p>
             )}
             <p>작성자:{name}</p>
-            {url !== "" ? (
-              <div>
-                <img src={url} alt="photo" width="50px" height="50px" />
-              </div>
-            ) : null}
           </div>
           {isOwner ? (
             <div>
