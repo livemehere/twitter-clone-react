@@ -12,6 +12,7 @@ function Tweet({
   updateTimestamp,
   isOwner,
   url,
+  deleteFile,
 }) {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweet);
@@ -48,6 +49,7 @@ function Tweet({
     if (!ok) return;
 
     await deleteDoc(doc(db, "tweets", docId));
+    deleteFile(url);
   };
   return (
     <>

@@ -7,7 +7,13 @@ import {
   addDoc,
   onSnapshot,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import Tweet from "../components/Tweet";
 
 function Home({ user }) {
@@ -91,6 +97,9 @@ function Home({ user }) {
       console.error("Error adding document: ", e);
     }
   };
+  const deleteFile = async (url) => {
+    await deleteObject(ref(storage, url));
+  };
 
   return (
     <div>
@@ -125,6 +134,7 @@ function Home({ user }) {
             updateTimestamp={tweet.updateTimestamp}
             isOwner={user.uid === tweet.uid}
             url={tweet.url}
+            deleteFile={deleteFile}
           />
         ))}
       </div>
