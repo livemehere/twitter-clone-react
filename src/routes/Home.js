@@ -76,10 +76,15 @@ function Home({ user }) {
 
   const getTweetsFromDB = async () => {
     const unsub = onSnapshot(collection(db, "tweets"), (querySnapshot) => {
-      const tweetArray = querySnapshot.docs.map((doc) => ({
+      let tweetArray = querySnapshot.docs.map((doc) => ({
         docId: doc.id,
         ...doc.data(),
       }));
+
+      tweetArray.sort((a, b) => {
+        return b.timestamp - a.timestamp;
+      });
+
       setTweets(tweetArray);
     });
   };
