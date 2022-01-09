@@ -52,7 +52,7 @@ const Profile = ({ user }) => {
         // Profile updated!
         // ...
         alert("업데이트되었습니다!");
-        window.location.href = "/";
+        window.location.href = "/twitter-clone-react/";
       })
       .catch((error) => {
         // An error occurred
