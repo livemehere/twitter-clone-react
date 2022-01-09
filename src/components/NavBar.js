@@ -12,8 +12,10 @@ function NavBar() {
   };
   return (
     <nav>
-      <Link to="/">HOME</Link>
-      <Link to="/profile">PROFILE</Link>
+      <div>
+        <Link to="/">HOME</Link>
+        <Link to="/profile">PROFILE</Link>
+      </div>
       <button onClick={logout}>로그아웃</button>
     </nav>
   );

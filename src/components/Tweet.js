@@ -53,56 +53,85 @@ function Tweet({
     deleteFile(url);
   };
   return (
-    <>
+    <div className="tweet-box">
       {editing ? (
-        <form onSubmit={onSubmit}>
-          <div>
+        <form onSubmit={onSubmit} className="tweet">
+          <div className="content">
+            <div className="meta">
+              <p>작성자:{name}</p>
+              <p className="timestamp">
+                직성일: {moment(timestamp).format("h:mm a · YYYY/MM/DD")}
+              </p>
+            </div>
             <input
               type="text"
               value={newTweet}
               onChange={onChange}
               placeholder="what is your new tweet?"
+              className="text"
             />
-            <p>직성일: {moment(timestamp).format("h:mm a · YYYY/MM/DD")}</p>
-            <p>작성자:{name}</p>
           </div>
-          <div>
+          <div className="option">
             <input type="submit" value="수정하기" />
             <button onClick={() => setEditing((prev) => !prev)}>취소</button>
           </div>
         </form>
       ) : (
-        <div>
-          <div>
-            <h2>{tweet}</h2>
-
-            <div>
-              <img src={url} alt="photo" width="50px" height="50px" />
-            </div>
-
-            {isUpdated ? (
-              <p>
-                {`수정일:${moment(updateTimestamp).format(
+        <div className="tweet">
+          <div className="content">
+            <div className="meta">
+              <p>작성자:{name}</p>
+              {isUpdated ? (
+                <p className="timestamp">
+                  {`${moment(updateTimestamp).format(
+                    "h:mm a · YYYY/MM/DD"
+                  )} 수정됨`}
+                </p>
+              ) : (
+                <p className="timestamp">{`${moment(timestamp).format(
                   "h:mm a · YYYY/MM/DD"
-                )}`}
-              </p>
-            ) : (
-              <p>{`작성일:${moment(timestamp).format(
-                "h:mm a · YYYY/MM/DD"
-              )}`}</p>
-            )}
-            <p>작성자:{name}</p>
+                )}`}</p>
+              )}
+            </div>
+            <h2 className="text">{tweet}</h2>
+            {url !== "" ? (
+              <div className="pre-img">
+                <img src={url} alt="photo" width="100%" height="100%" />
+              </div>
+            ) : null}
           </div>
           {isOwner ? (
-            <div>
+            <div className="option">
               <button onClick={() => setEditing((prev) => !prev)}>수정</button>
               <button onClick={handleDelete}>삭제</button>
             </div>
           ) : null}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
 export default Tweet;
+
+// <div className="tweet">
+//           <div className="content">
+//             <div className="meta">
+//               <p>작성자:{name}</p>
+//               {isUpdated ? (
+//                 <p className="timestamp">
+//                   {`${moment(updateTimestamp).format(
+//                     "h:mm a · YYYY/MM/DD"
+//                   )} 수정됨`}
+//                 </p>
+//               ) : (
+//                 <p className="timestamp">{`${moment(timestamp).format(
+//                   "h:mm a · YYYY/MM/DD"
+//                 )}`}</p>
+//               )}
+//             </div>
+//             <h2>{tweet}</h2>
+//             <div className="pre-img">
+//               <img src={url} alt="photo" width="100%" height="100%" />
+//             </div>
+//           </div>

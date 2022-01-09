@@ -36,13 +36,13 @@ const Profile = ({ user }) => {
       });
   };
   return (
-    <div>
+    <div className="container">
       <h1>
         {!isEmailUser
           ? `${user.displayName}의 Profile`
           : "이름과 프로필 사진을 등록해보세요!"}
       </h1>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="profile-form">
         <input
           type="text"
           placeholder="input your new name"

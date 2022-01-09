@@ -15,6 +15,8 @@ import {
   deleteObject,
 } from "firebase/storage";
 import Tweet from "../components/Tweet";
+import attachment from "../attachment.png";
+import cancel from "../cancel.png";
 
 function Home({ user }) {
   const [tweet, setTweet] = useState("");
@@ -43,12 +45,14 @@ function Home({ user }) {
       alert("공백을 채워주세요!");
       return;
     }
-
-    const url = await upload(photo, type);
+    let url = "";
+    if (photo !== "") {
+      url = await upload(photo, type);
+    }
     await addTweetToDB(tweet, url);
     setType("");
     setTweet("");
-    setPhoto(null);
+    setPhoto("");
   };
   const onChange = (e) => {
     setTweet(e.target.value);
@@ -103,9 +107,9 @@ function Home({ user }) {
   };
 
   return (
-    <div>
-      <h1>HOME</h1>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <h1>Kwitter</h1>
+      <form onSubmit={onSubmit} className="tweet-form">
         <input
           type="text"
           value={tweet}
@@ -113,16 +117,30 @@ function Home({ user }) {
           maxLength={100}
           placeholder="What's happening'"
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" />
+        <div className="submit-box">
+          <label htmlFor="inputFile">
+            <img src={attachment} />
+          </label>
+          <input
+            id="inputFile"
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
+            style={{ display: "none" }}
+          />
+          <input type="submit" value="Tweet" />
+        </div>
+
         {preFile && (
-          <div>
-            <img src={preFile} alt="미리보기" width="50px" height="50px" />
-            <button onClick={() => setPreFile(null)}>취소</button>
+          <div className="pre-img">
+            <img src={preFile} alt="미리보기" width="100%" height="100%" />
+            <button onClick={() => setPreFile(null)}>
+              <img src={cancel} alt="" />
+            </button>
           </div>
         )}
       </form>
-      <div>
+      <div className="tweet-container">
         {tweets.map((tweet) => (
           <Tweet
             key={tweet.docId}

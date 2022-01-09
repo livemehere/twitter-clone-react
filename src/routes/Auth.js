@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import google from "../google.png";
+import tweeterIcon from "../tweet-icon.png";
 
 function Auth() {
   const auth = getAuth(firebaseApp);
@@ -58,9 +60,10 @@ function Auth() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={signInEmailUser}>
+    <div className="container">
+      <img src={tweeterIcon} className="tweet-icon" />
+      <h1>지금 일어나고 있는 일</h1>
+      <form onSubmit={signInEmailUser} className="login-form">
         <input type="email" placeholder="Email" name="email" required />
         <input
           type="password"
@@ -70,7 +73,7 @@ function Auth() {
         />
         <input type="submit" value="이메일 로그인" />
       </form>
-      <form onSubmit={createEmailUser}>
+      <form onSubmit={createEmailUser} className="login-form secondForm">
         <input type="email" placeholder="new Email" name="email" required />
         <input
           type="password"
@@ -81,7 +84,10 @@ function Auth() {
         <input type="submit" value="이메일 회원가입" />
       </form>
       <div>
-        <button onClick={googleLogin}>구글로 로그인</button>
+        <button onClick={googleLogin} className="google-btn">
+          <img src={google} width="16" />
+          <span style={{ paddingLeft: "5px" }}> 구글로 로그인</span>
+        </button>
       </div>
     </div>
   );
