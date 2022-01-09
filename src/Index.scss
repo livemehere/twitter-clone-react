@@ -248,3 +248,85 @@ nav {
     width: 93%;
   }
 }
+
+@media screen and (max-width: 1057px) {
+  :root {
+    font-size: 0.5rem;
+  }
+  .pre-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    right: -40px;
+    border: 3px solid #6f787e;
+    img {
+      border-radius: 50%;
+    }
+    button {
+      width: 50px;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      position: absolute;
+      bottom: -20px;
+      right: -30px;
+      img {
+        width: 50px;
+      }
+    }
+  }
+
+  .tweet-box:nth-child(even) {
+    .tweet {
+      .content {
+        .pre-img {
+          left: -40px;
+        }
+      }
+    }
+  }
+
+  .tweet-container {
+    width: 90%;
+    .tweet-box {
+      margin: 20px 0;
+      margin-bottom: 70px;
+      position: relative;
+      form {
+        .content {
+          width: 100%;
+          input {
+            height: 30vh;
+            border-bottom: none;
+          }
+        }
+      }
+      .tweet {
+        border-radius: 10px;
+        border: 1px solid #6f787e;
+        .option {
+          display: flex;
+          top: auto;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+  }
+
+  .edit-option {
+    width: 100%;
+    input {
+      flex: 1;
+    }
+    button {
+      flex: 1;
+    }
+  }
+
+  .tweet-form {
+    width: 90%;
+  }
+}

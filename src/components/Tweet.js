@@ -14,6 +14,7 @@ function Tweet({
   url,
   deleteFile,
   userURL,
+  loadMyTweets,
 }) {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweet);
@@ -40,6 +41,7 @@ function Tweet({
       alert("업데이트에 실패했습니다");
     } finally {
       setEditing(false);
+      loadMyTweets();
     }
   };
   const onChange = (e) => {
@@ -51,6 +53,7 @@ function Tweet({
 
     await deleteDoc(doc(db, "tweets", docId));
     deleteFile(url);
+    loadMyTweets();
   };
   return (
     <div className="tweet-box">
@@ -71,7 +74,7 @@ function Tweet({
               className="text"
             />
           </div>
-          <div className="option">
+          <div className="option edit-option">
             <input type="submit" value="수정하기" />
             <button onClick={() => setEditing((prev) => !prev)}>취소</button>
           </div>
