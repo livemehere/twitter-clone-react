@@ -1,0 +1,299 @@
+body {
+  background-color: #000000;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #d9d9d9;
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button, input[type=submit] {
+  background-color: #d9d9d9;
+  color: #2d3134;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+input {
+  padding: 1rem;
+  border-radius: 30px;
+  border: 1px solid #d9d9d9;
+  background-color: transparent;
+  margin: 5px 0;
+  color: #d9d9d9;
+  width: 100%;
+  outline: none;
+}
+
+.login-form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.secondForm {
+  margin-top: 2rem;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.tweet-icon {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+}
+
+.tweet-form {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #6e767d;
+  border-radius: 15px;
+  padding: 1rem;
+  display: flex;
+  position: relative;
+}
+.tweet-form .submit-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.tweet-form .submit-box label img {
+  width: 2rem;
+}
+.tweet-form input {
+  width: 95%;
+}
+.tweet-form input[type=submit] {
+  background-color: #288cd8;
+  border: none;
+  color: #d8d8d8;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.pre-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -60px;
+  right: -80px;
+  border: 3px solid #6f787e;
+}
+.pre-img img {
+  border-radius: 50%;
+}
+.pre-img button, .pre-img input[type=submit] {
+  width: 50px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  bottom: -20px;
+  right: -30px;
+}
+.pre-img button img, .pre-img input[type=submit] img {
+  width: 50px;
+}
+
+.tweet-container {
+  width: 60%;
+  margin: 0 auto;
+  color: #d9d9d9;
+}
+.tweet-container .tweet-box {
+  margin: 20px 0;
+  margin-bottom: 70px;
+  position: relative;
+}
+.tweet-container .tweet-box form .content {
+  width: 100%;
+}
+.tweet-container .tweet-box form .content input {
+  width: 80%;
+  margin-right: 7rem;
+  border: none;
+  border-bottom: 1px solid #6f787e;
+  border-radius: 0;
+  padding-bottom: 5px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+.tweet-container .tweet-box .tweet {
+  border-radius: 10px;
+  border: 1px solid #6f787e;
+}
+.tweet-container .tweet-box .tweet .content .meta {
+  display: flex;
+  padding-top: 15px;
+  padding-left: 20px;
+}
+.tweet-container .tweet-box .tweet .content .meta p {
+  margin: 0 10px;
+}
+.tweet-container .tweet-box .tweet .content .meta .timestamp {
+  color: #d9d9d981;
+}
+.tweet-container .tweet-box .tweet .content .text {
+  font-size: 2rem;
+  text-align: left;
+  padding-top: 15px;
+  padding-left: 30px;
+  padding-bottom: 25px;
+}
+.tweet-container .tweet-box .tweet .option {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.tweet-container .tweet-box .tweet .option button, .tweet-container .tweet-box .tweet .option input[type=submit] {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.tweet-box:nth-child(even) .tweet .content .pre-img {
+  left: -80px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+nav a {
+  color: #adaeae;
+  padding: 0.7rem 2rem;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 200ms;
+}
+nav a:visited {
+  color: #adaeae;
+}
+nav a:hover {
+  background-color: #151515;
+}
+nav button, nav input[type=submit] {
+  background-color: transparent;
+  color: #adaeae;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+nav button:hover, nav input[type=submit]:hover {
+  background-color: #151515;
+}
+
+.profile-form {
+  margin: 0 auto;
+  max-width: 568px;
+  width: 40%;
+}
+.profile-form input[type=text] {
+  width: 93%;
+}
+
+@media screen and (max-width: 1057px) {
+  :root {
+    font-size: 0.5rem;
+  }
+
+  .pre-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    right: -40px;
+    border: 3px solid #6f787e;
+  }
+  .pre-img img {
+    border-radius: 50%;
+  }
+  .pre-img button, .pre-img input[type=submit] {
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    position: absolute;
+    bottom: -20px;
+    right: -30px;
+  }
+  .pre-img button img, .pre-img input[type=submit] img {
+    width: 50px;
+  }
+
+  .tweet-box:nth-child(even) .tweet .content .pre-img {
+    left: -40px;
+  }
+
+  .tweet-container {
+    width: 90%;
+  }
+  .tweet-container .tweet-box {
+    margin: 20px 0;
+    margin-bottom: 70px;
+    position: relative;
+  }
+  .tweet-container .tweet-box form .content {
+    width: 100%;
+  }
+  .tweet-container .tweet-box form .content input {
+    height: 30vh;
+    border-bottom: none;
+  }
+  .tweet-container .tweet-box .tweet {
+    border-radius: 10px;
+    border: 1px solid #6f787e;
+  }
+  .tweet-container .tweet-box .tweet .option {
+    display: flex;
+    top: auto;
+    right: 0;
+    bottom: 0;
+  }
+
+  .edit-option {
+    width: 100%;
+  }
+  .edit-option input {
+    flex: 1;
+  }
+  .edit-option button, .edit-option input[type=submit] {
+    flex: 1;
+  }
+
+  .tweet-form {
+    width: 90%;
+  }
+}/*# sourceMappingURL=Index.css.map */

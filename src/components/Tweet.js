@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useState } from "react";
+import React, { useState } from "react";
 import firebaseInstance from "../firebaseInstance";
 import { getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
 function Tweet({

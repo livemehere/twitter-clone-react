@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "./Router";
 import firebaseApp from "../firebaseInstance";
 import { auth, getAuth, onAuthStateChanged } from "firebase/auth";
