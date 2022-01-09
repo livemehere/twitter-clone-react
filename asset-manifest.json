@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/twitter-clone-react/static/css/main.5e45e9ef.css",
-    "main.js": "/twitter-clone-react/static/js/main.e0ca27cc.js",
+    "main.css": "/twitter-clone-react/static/css/main.5e37584c.chunk.css",
+    "main.js": "/twitter-clone-react/static/js/main.a2c8c4e3.chunk.js",
+    "main.js.map": "/twitter-clone-react/static/js/main.a2c8c4e3.chunk.js.map",
+    "runtime~main.js": "/twitter-clone-react/static/js/runtime~main.4ac32c6a.js",
+    "runtime~main.js.map": "/twitter-clone-react/static/js/runtime~main.4ac32c6a.js.map",
+    "static/js/2.d051b89f.chunk.js": "/twitter-clone-react/static/js/2.d051b89f.chunk.js",
+    "static/js/2.d051b89f.chunk.js.map": "/twitter-clone-react/static/js/2.d051b89f.chunk.js.map",
     "index.html": "/twitter-clone-react/index.html",
-    "main.5e45e9ef.css.map": "/twitter-clone-react/static/css/main.5e45e9ef.css.map",
-    "main.e0ca27cc.js.map": "/twitter-clone-react/static/js/main.e0ca27cc.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.5e45e9ef.css",
-    "static/js/main.e0ca27cc.js"
-  ]
+    "precache-manifest.214806e7de5f65d74952e27eacfbf665.js": "/twitter-clone-react/precache-manifest.214806e7de5f65d74952e27eacfbf665.js",
+    "service-worker.js": "/twitter-clone-react/service-worker.js",
+    "static/css/main.5e37584c.chunk.css.map": "/twitter-clone-react/static/css/main.5e37584c.chunk.css.map"
+  }
 }
