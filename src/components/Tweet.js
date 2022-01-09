@@ -13,6 +13,7 @@ function Tweet({
   isOwner,
   url,
   deleteFile,
+  userURL,
 }) {
   const [editing, setEditing] = useState(false);
   const [newTweet, setNewTweet] = useState(tweet);
@@ -74,11 +75,11 @@ function Tweet({
         <div>
           <div>
             <h2>{tweet}</h2>
-            {url !== "" ? (
-              <div>
-                <img src={url} alt="photo" width="50px" height="50px" />
-              </div>
-            ) : null}
+
+            <div>
+              <img src={url} alt="photo" width="50px" height="50px" />
+            </div>
+
             {isUpdated ? (
               <p>
                 {`수정일:${moment(updateTimestamp).format(

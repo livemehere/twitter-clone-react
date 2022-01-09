@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import NavBar from "./NavBar";
+import Profile from "./Profile";
 
 function Router({ isLoggedIn, user }) {
   return (
@@ -15,7 +16,7 @@ function Router({ isLoggedIn, user }) {
               <Home user={user} />
             </Route>
             <Route path="/profile">
-              <h1>Profile</h1>
+              <Profile user={user} />
             </Route>
           </>
         ) : (

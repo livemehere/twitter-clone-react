@@ -22,7 +22,6 @@ function Home({ user }) {
   const storage = getStorage(firebaseInstance);
   const [photo, setPhoto] = useState("");
   const [type, setType] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [preFile, setPreFile] = useState();
   const [tweets, setTweets] = useState([]);
 
@@ -30,12 +29,10 @@ function Home({ user }) {
     getTweetsFromDB();
   }, []);
 
-  const upload = async (file, type, setLoading) => {
+  const upload = async (file, type) => {
     const fileRef = ref(storage, `/tweetPhotos/${uuidv4()}.${type}`);
-    setLoading(true);
     const snapshot = await uploadBytes(fileRef, file);
     const url = await getDownloadURL(fileRef);
-    setLoading(false);
     setPreFile(null);
     return url;
   };
@@ -47,10 +44,11 @@ function Home({ user }) {
       return;
     }
 
-    const url = await upload(photo, type, setIsLoading);
+    const url = await upload(photo, type);
     await addTweetToDB(tweet, url);
     setType("");
     setTweet("");
+    setPhoto(null);
   };
   const onChange = (e) => {
     setTweet(e.target.value);
@@ -84,16 +82,18 @@ function Home({ user }) {
 
   const addTweetToDB = async (tweet, url) => {
     // FIXME: 그냥 이메일로 가입한 유저 에겐 비어있는내용이에요!
+
+    let option = {
+      uid: user.uid,
+      tweet: tweet,
+      name: user.displayName,
+      timestamp: Date.now(),
+      isUpdated: false,
+      updateTimestamp: Date.now(),
+      url: url,
+    };
     try {
-      await addDoc(collection(db, "tweets"), {
-        uid: user.uid,
-        tweet: tweet,
-        name: user.displayName,
-        timestamp: Date.now(),
-        isUpdated: false,
-        updateTimestamp: Date.now(),
-        url: url,
-      });
+      await addDoc(collection(db, "tweets"), option);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
